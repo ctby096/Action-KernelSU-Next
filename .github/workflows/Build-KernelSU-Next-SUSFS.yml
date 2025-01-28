@@ -109,7 +109,10 @@ jobs:
       - name: Build kernel
         run: |
          cd kernel_workspace
-         ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki --lto=none
+         export LTO=thin
+         sed -i '182s/.*/    local default_value=thin/' kernel_platform/oplus/build/oplus_setup.sh
+         sed -n '182p' kernel_platform/oplus/build/oplus_setup.sh
+         ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
       - name: Make AnyKernel3
         run: |
          git clone https://github.com/Kernel-SU/AnyKernel3 --depth=1
