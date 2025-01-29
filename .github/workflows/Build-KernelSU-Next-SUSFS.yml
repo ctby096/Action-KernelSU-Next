@@ -109,7 +109,7 @@ jobs:
       - name: Build kernel
         run: |
          cd kernel_workspace
-         export LTO=thin
+         export LTO=full
          sed -i '182s/.*/    local default_value=thin/' kernel_platform/oplus/build/oplus_setup.sh
          sed -n '182p' kernel_platform/oplus/build/oplus_setup.sh
          ./kernel_platform/oplus/build/oplus_build_kernel.sh ${{ github.event.inputs.CPUD }} gki
